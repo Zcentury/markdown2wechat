@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Venom GUI Markdown To WeChat</title>
+    <meta
+        name="description"
+        content="将 Markdown 实时转换为更贴近 venom_gui 视觉语言的微信公众号文章排版，支持实时预览、复制 HTML、复制公众号内容与下载。"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+    <div class="page-shell">
+        <main class="workspace">
+            <section class="panel editor-panel">
+                <div class="panel-header">
+                    <div>
+                        <h1>Markdown 输入区</h1>
+                        <p>左侧像控制台一样写内容，右侧实时生成适合微信公众号的 Venom 风格排版。</p>
+                    </div>
+                    <div class="toolbar">
+                        <button id="sampleBtn" class="btn btn-ghost" type="button">插入示例</button>
+                        <button id="importBtn" class="btn btn-ghost" type="button">导入 Markdown/图片</button>
+                        <button id="clearBtn" class="btn btn-ghost" type="button">清空</button>
+                    </div>
+                </div>
+
+                <div class="panel-body editor-body">
+                    <textarea
+                        id="markdownInput"
+                        spellcheck="false"
+                        placeholder="# 在这里输入 Markdown&#10;&#10;例如：&#10;## 功能亮点&#10;- 实时预览&#10;- Venom 主题&#10;- 微信友好链接脚注"
+                    ></textarea>
+                </div>
+
+                <div class="panel-footer">
+                    <div class="stats">
+                        <span id="charCount">字数 0</span>
+                        <span id="lineCount">行数 0</span>
+                        <span id="linkCount">链接 0</span>
+                        <span id="readingTime">阅读 0 分钟</span>
+                    </div>
+                    <div class="hint">公众号不稳定支持 base64 图片，发布时请在微信编辑器中上传图片或使用可访问的 HTTPS 图片。</div>
+                </div>
+            </section>
+
+            <section class="panel preview-panel">
+                <div class="panel-header">
+                    <div>
+                        <h1>公众号 Venom 主题预览</h1>
+                        <p>保留微信友好的内联样式，同时把视觉语气拉到 venom_gui 那一套工作台风格。</p>
+                    </div>
+                    <div class="toolbar">
+                        <div class="segment">
+                            <button class="segment-btn active" data-view="preview" type="button">预览</button>
+                            <button class="segment-btn" data-view="source" type="button">HTML</button>
+                        </div>
+                        <button id="copyRichBtn" class="btn btn-primary" type="button">复制公众号内容</button>
+                        <button id="copyHtmlBtn" class="btn btn-ghost" type="button">复制 HTML</button>
+                        <button id="downloadBtn" class="btn btn-ghost" type="button">下载 HTML</button>
+                    </div>
+                </div>
+
+                <div class="panel-body preview-body">
+                    <div id="previewView" class="view active">
+                        <div class="wechat-stage">
+                            <div class="wechat-toolbar">
+                                <span>Venom Theme Preview</span>
+                                <span>渲染仅供参考，以微信后台实际效果为准</span>
+                            </div>
+                            <div class="wechat-canvas">
+                                <div id="wechatPreview" class="wechat-preview"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="sourceView" class="view">
+                        <pre id="htmlOutput" class="html-output"></pre>
+                    </div>
+                </div>
+
+                <div class="panel-footer">
+                    <div id="renderStatus" class="status-text">等待输入 Markdown…</div>
+                    <div class="hint">推荐在 `localhost` 或 `https` 环境下使用“复制公众号内容”，兼容性更好。</div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <input id="fileInput" type="file" accept=".md,.markdown,text/markdown,image/*" multiple hidden />
+
+    <script src="./app.js"></script>
+</body>
+</html>
