@@ -507,14 +507,16 @@ function consumeHeading(lines, start, ctx) {
     } else {
         const headingStyles = {
             2: {
-                margin: '32px 0 14px',
-                display: 'block',
+                margin: '32px auto 14px',
+                display: 'table',
                 boxSizing: 'border-box',
-                width: '100%',
+                width: 'auto',
+                maxWidth: '100%',
                 padding: '12px 16px',
                 border: `1px solid ${TOKENS.heroBackground}`,
                 borderRadius: '8px',
                 backgroundColor: TOKENS.heroBackground,
+                textAlign: 'center',
                 fontSize: '19px',
                 fontWeight: '800',
                 lineHeight: '1.42',
